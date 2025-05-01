@@ -45,3 +45,6 @@ def analyze():
         translated = "(번역 실패)"
 
     return jsonify({"tokens": result, "translation": translated})
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
