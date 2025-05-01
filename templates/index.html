@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>구문 분석기 (spaCy)</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .word-block { display: inline-block; text-align: center; margin: 10px; }
+        .pos { color: red; font-weight: bold; }
+        .dep { color: blue; font-weight: bold; }
+        #translation { margin-top: 20px; font-size: 18px; color: green; }
+    </style>
+</head>
+<body>
+    <h1>영어 문장 구문 분석기</h1>
+    <textarea id="input" rows="3" cols="60" placeholder="영어 문장을 입력하세요"></textarea><br>
+    <button onclick="analyze()">분석하기</button>
+    <div id="translation"></div>
+    <div id="result"></div>
+
+    <script>
+    async function analyze() {
+        const sentence = document.getElementById('input').value;
+        const res = await fetch("/analyze", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sentence })
+        });
+
+        const json = await res.json();
+        const data = json.tokens;
+        const translation = json.translation;
+
+        document.getElementById("translation").innerText = "번역: " + translation;
+
+        let html = "<div style='display:flex; flex-wrap:wrap;'>";
+        data.forEach(tok => {
+            html += `<div class="word-block">
+                        <div class="pos">${tok.pos}</div>
+                        <div class="word">${tok.text}</div>
+                        <div class="dep">${tok.dep}</div>
+                    </div>`;
+        });
+        html += "</div>";
+        document.getElementById('result').innerHTML = html;
+    }
+    </script>
+</body>
+</html>
