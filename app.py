@@ -10,7 +10,7 @@ nlp = spacy.load("en_core_web_sm")
 pos_kor = {
     "PRON": "대명사", "NOUN": "명사", "VERB": "동사", "ADJ": "형용사",
     "ADV": "부사", "DET": "관사", "AUX": "조동사", "INTJ": "감탄사",
-    "SCONJ": "접속사", "ADP": "전치사", "PROPN": "고유명사", "PART": "부정사"
+    "SCONJ": "접속사", "ADP": "전치사", "PROPN": "고유명사", "PART": "부정사", "NUM": "(수사)"
 }
 
 dep_kor = {
