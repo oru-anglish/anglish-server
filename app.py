@@ -17,7 +17,7 @@ dep_kor = {
     "nsubj": "주어", "ROOT": "동사", "attr": "보어", "dobj": "목적어",
     "prep": "전치사구", "advmod": "부사어", "amod": "형용어", "det": "관형어",
     "compound": "형용어", "pobj": "전치사 목적어", "cc": "접속사", "conj": "병치",
-    "mark": "접속사", "advcl": "부사절", "xcomp": "보어", "aux": "조동사"
+    "mark": "접속사", "advcl": "부사절", "xcomp": "보어", "aux": "-", "expl": "(가주어)", "poss": "(소유격)", "intj": "-"
 }
 
 @app.route("/")
