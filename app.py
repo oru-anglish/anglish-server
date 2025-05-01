@@ -9,7 +9,7 @@ nlp = spacy.load("en_core_web_sm")
 pos_kor = {
     "PRON": "대명사", "NOUN": "명사", "VERB": "동사", "ADJ": "형용사",
     "ADV": "부사", "DET": "관사", "AUX": "조동사", "INTJ": "감탄사",
-    "SCONJ": "접속사", "ADP": "전치사"
+    "SCONJ": "접속사", "ADP": "전치사", "PROPN": "고유명사"
 }
 
 dep_kor = {
@@ -27,11 +27,13 @@ def analyze():
     doc = nlp(sentence)
     result = []
     for token in doc:
-        result.append({
-            "text": token.text,
-            "pos": pos_kor.get(token.pos_, token.pos_),
-            "dep": dep_kor.get(token.dep_, token.dep_)
-        })
+    if token.pos_ in ["PUNCT", "SPACE"]:
+        continue  # 문장부호와 공백 제거
+    result.append({
+        "text": token.text,
+        "pos": pos_kor.get(token.pos_, token.pos_),
+        "dep": dep_kor.get(token.dep_, token.dep_)
+    })
     return jsonify(result)
 
 if __name__ == "__main__":
